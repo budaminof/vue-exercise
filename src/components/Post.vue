@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>THIS IS A SINGLE POST</h3>
+    <slot></slot>
   </div>
 </template>
 

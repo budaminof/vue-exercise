@@ -16,17 +16,18 @@ export const mutations = {
   SET_USER_POSTS(state, posts) {
     state.userPosts = posts;
   },
-  LOADING(state) {
-    state.loading = !state.loading;
+  LOADING(state, status) {
+    state.loading = status;
   },
-  ERROR(state) {
-    state.error = !state.error;
+  ERROR(state, status) {
+    state.error = status;
   },
 };
 
 export const actions = {
   async fetchPosts({ commit, rootState }) {
-    commit('LOADING');
+    commit('LOADING', true);
+    commit('ERROR', false);
     try {
       const res = await PostService.getPosts();
       const userPosts = res.data
@@ -34,10 +35,10 @@ export const actions = {
       const posts = res.data.filter(item => Number(item.userId) !== Number(rootState.user.user.id));
       commit('SET_POSTS', posts);
       commit('SET_USER_POSTS', userPosts);
-      commit('LOADING');
+      commit('LOADING', false);
     } catch (err) {
-      commit('LOADING');
-      commit('ERROR');
+      commit('LOADING', false);
+      commit('ERROR', true);
       // eslint-disable-next-line no-console
       console.log('OPSI', err);
     }

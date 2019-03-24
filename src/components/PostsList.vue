@@ -1,30 +1,45 @@
 <template>
-  <div>
-    <h2>List container</h2>
-    <Post/>
+  <div class="posts">
+    <h2>{{info}}</h2>
+    <Post v-for="post in posts" :key="post.id">
+      <h3>{{post.title}}</h3>
+      <p>{{post.body}}</p>
+    </Post>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
 import Post from './Post';
 
 export default {
   components: { Post },
-  created() {
-    this.fetchPosts();
-  },
-  computed: {
-    ...mapState(['post']),
-  },
-  methods: {
-    ...mapActions('post', {
-      fetchPosts: 'fetchPosts',
-    }),
+  props: {
+    info: {
+      type: String,
+      required: true,
+    },
+    posts: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>
 
 <style scoped>
+.user-post {
+  border-right: 5px solid rgb(21, 21, 21);
+  padding-right: 30px;
+}
+
+.user-post,
+.posts {
+  height: 90vh;
+  overflow: scroll;
+  width: 45vw;
+}
+
+h2 {
+  text-transform: uppercase;
+}
 </style>

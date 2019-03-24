@@ -16,6 +16,11 @@ export default {
 
 <style>
 h1 {
+  font-size: 45px;
+}
+
+h1,
+h2 {
   text-transform: uppercase;
   font-family: "Oswald", sans-serif;
 }
