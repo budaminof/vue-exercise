@@ -1,16 +1,20 @@
 <template>
   <div class="wrapper">
-    <PostsList :posts="userPosts" :info="infoUser"/>
-    <PostsList :posts="posts" :info="infoOtherUsers"/>
+    <Loading v-if="loading" class="center"/>
+    <Error v-if="error" class="center"/>
+    <PostsList v-if="!loading && !error" :posts="userPosts" :info="infoUser"/>
+    <PostsList v-if="!loading && !error" :posts="posts" :info="infoOtherUsers"/>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
 import PostsList from '../components/PostsList';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 export default {
-  components: { PostsList },
+  components: { PostsList, Loading, Error },
   created() {
     this.fetchPosts();
   },
@@ -19,6 +23,8 @@ export default {
       user: state => state.user.user,
       posts: state => state.post.posts,
       userPosts: state => state.post.userPosts,
+      loading: state => state.post.loading,
+      error: state => state.post.error,
     }),
     infoUser() {
       return `posts by user ${this.user.id}`;
@@ -40,5 +46,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.center {
+  margin: 0 auto;
 }
 </style>

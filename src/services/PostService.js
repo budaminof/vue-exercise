@@ -7,7 +7,7 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 10000,
-  delayed: false,
+  delayed: true,
 });
 
 // delay:true to see the loading message
