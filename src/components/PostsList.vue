@@ -32,7 +32,6 @@ export default {
   padding-right: 30px;
 }
 
-.user-post,
 .posts {
   height: 90vh;
   overflow: scroll;

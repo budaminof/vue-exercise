@@ -39,8 +39,6 @@ export const actions = {
     } catch (err) {
       commit('LOADING', false);
       commit('ERROR', true);
-      // eslint-disable-next-line no-console
-      console.log('OPSI', err);
     }
   },
 };

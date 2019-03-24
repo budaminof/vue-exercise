@@ -10,7 +10,7 @@ const apiClient = axios.create({
   delayed: false,
 });
 
-// set delay to true to see the loading message
+// delay:true to see the loading message
 apiClient.interceptors.request.use((config) => {
   if (config.delayed) {
     return new Promise(resolve => setTimeout(() => resolve(config), 4000));

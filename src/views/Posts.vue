@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <PostsList :posts="userPosts" :info="infoUser"/>
-    <PostsList :posts="posts" :info="postsInfo"/>
+    <PostsList :posts="posts" :info="infoOtherUsers"/>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     infoUser() {
       return `posts by user ${this.user.id}`;
     },
-    postsInfo() {
+    infoOtherUsers() {
       return 'posts by everyone else';
     },
   },
