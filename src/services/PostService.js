@@ -10,7 +10,7 @@ const apiClient = axios.create({
   delayed: true,
 });
 
-// delay:true to see the loading message
+// set delay:true to see the loading message
 apiClient.interceptors.request.use((config) => {
   if (config.delayed) {
     return new Promise(resolve => setTimeout(() => resolve(config), 4000));
@@ -21,5 +21,7 @@ apiClient.interceptors.request.use((config) => {
 export default {
   getPosts() {
     return apiClient.get('https://jsonplaceholder.typicode.com/posts');
+    // thorw error to test the Error component
+    // throw new Error();
   },
 };
