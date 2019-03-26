@@ -4,14 +4,13 @@ import PostService from '../../../src/services/PostService';
 import posts from '../../__mocks__/data';
 
 describe('========== POST MODULE ============', () => {
-  const state = {
-    posts: [],
-    userPosts: [],
-    loading: false,
-    error: false,
-  };
-
   describe('MUTATIONS', () => {
+    const state = {
+      posts: [],
+      userPosts: [],
+      loading: false,
+      error: false,
+    };
     it('set loading to true or false', () => {
       expect(state.loading).to.equal(false);
       mutations.LOADING(state, true);
@@ -48,12 +47,15 @@ describe('========== POST MODULE ============', () => {
       const commit = sinon.spy();
       const postsAPI = sinon.stub(PostService, 'getPosts');
       postsAPI.resolves({ data: posts });
-
       await actions.fetchPosts({ commit, rootState });
+
       expect(commit.args).to.have.length(5);
+      expect(commit.args[2][1].length).to.equal(8);
+      expect(commit.args[2][0]).to.equal('SET_POSTS');
+      expect(commit.args[2][1].length).to.equal(8);
+      expect(commit.args[3][0]).to.equal('SET_USER_POSTS');
+      expect(commit.args[3][1].length).to.equal(3);
       expect(postsAPI.calledOnce).to.be.true;
-      expect(state.posts.length).to.equal(8);
-      expect(state.userPosts.length).to.equal(3);
       PostService.getPosts.restore();
     });
 
@@ -61,10 +63,11 @@ describe('========== POST MODULE ============', () => {
       const commit = sinon.spy();
       const postsAPI = sinon.stub(PostService, 'getPosts');
       postsAPI.rejects(new Error());
-
       await actions.fetchPosts({ commit, rootState });
+
       expect(postsAPI.calledOnce).to.be.true;
       expect(commit.args).to.have.length(4);
+      expect(commit.args[3]).to.deep.equal(['ERROR', true]);
       PostService.getPosts.restore();
     });
   });
