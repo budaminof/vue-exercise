@@ -18,6 +18,10 @@ export default {
 h1 {
   font-size: 45px;
   text-align: center;
+  background: -webkit-linear-gradient(rgb(126, 63, 251, 1), rgb(63, 94, 251));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h1,

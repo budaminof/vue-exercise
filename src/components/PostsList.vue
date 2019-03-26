@@ -2,8 +2,12 @@
   <div class="posts">
     <h2>{{info}}</h2>
     <Post v-for="post in posts" :key="post.id">
-      <h3>{{post.title}}</h3>
-      <p>{{post.body}}</p>
+      <template slot="title">
+        <h3>{{post.title}}</h3>
+      </template>
+      <template slot="body">
+        <p>{{post.body}}</p>
+      </template>
     </Post>
   </div>
 </template>

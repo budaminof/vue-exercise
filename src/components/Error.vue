@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="error">
     <h2>We are sorry something went wrong 🐛</h2>
   </div>
 </template>
